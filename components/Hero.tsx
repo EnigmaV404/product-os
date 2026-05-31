@@ -27,37 +27,48 @@ export function Hero({ data, metrics }: HeroProps) {
   const words = data.headline.split(" ");
 
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{duration: 1.2,}}
       className="section-shell relative flex min-h-screen items-center overflow-hidden pt-28"
       id="home"
     >
       <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(300px,0.4fr)_minmax(0,0.6fr)] xl:grid-cols-[minmax(380px,0.42fr)_minmax(0,0.58fr)]">
         <motion.div
           className="group relative mx-auto aspect-[4/5] w-full max-w-[440px] overflow-hidden rounded-[2rem] border border-ink/10 bg-ink shadow-soft"
-          onMouseMove={(event) => {
-            const rect = event.currentTarget.getBoundingClientRect();
-            pointerX.set((event.clientX - rect.left) / rect.width - 0.5);
-            pointerY.set((event.clientY - rect.top) / rect.height - 0.5);
+          initial={{
+            opacity: 0,
+            x: 200,
           }}
-          onMouseLeave={() => {
-            pointerX.set(0);
-            pointerY.set(0);
+          whileInView={{
+            opacity: 1,
+            x: 0,
           }}
-          style={{ rotateX, rotateY, transformPerspective: 900 }}
+          viewport={{
+            once: true,
+            amount: 0.5,
+          }}
+          transition={{
+            duration: 1,
+            delay: 0.15,
+            ease: [0.22, 1, 0.36, 1],
+          }}
         >
           <motion.div
-            className="absolute inset-0 z-10 opacity-0 transition duration-500 group-hover:opacity-100"
-            style={{
-              background:
-                "radial-gradient(circle at 55% 35%, rgba(247,243,234,0.24), transparent 16rem)"
-            }}
-          />
+  className="absolute inset-0 z-20 bg-paper"
+  whileHover={{ opacity: 0 }}
+  transition={{ duration: 0.8 }}
+>
+  Product OS Diagram
+</motion.div>
           {portraitLoaded ? (
             <motion.img
               alt={data.name}
               className="h-full w-full object-cover grayscale transition duration-700 group-hover:grayscale-[70%]"
               onError={() => setPortraitLoaded(false)}
-              src="/portrait.webp"
+              src="/Vatsal.jpeg"
               style={{ x: imageX, y: imageY, scale: 1.06 }}
             />
           ) : (
@@ -81,7 +92,25 @@ export function Hero({ data, metrics }: HeroProps) {
           </div>
         </motion.div>
 
-        <div className="max-w-4xl">
+        <motion.div
+          className="max-w-4xl"
+          initial={{
+            opacity: 0,
+            x: -200,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.5,
+          }}
+          transition={{
+            duration: 1,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
           <motion.div
             className="mb-5 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/45 px-4 py-2 text-sm font-semibold text-ink/70 shadow-line"
             initial={{ opacity: 0, y: 16 }}
@@ -144,7 +173,7 @@ export function Hero({ data, metrics }: HeroProps) {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
       <a
         aria-label="Scroll to Product Brain"
@@ -159,6 +188,6 @@ export function Hero({ data, metrics }: HeroProps) {
           <ArrowDown size={18} />
         </motion.span>
       </a>
-    </section>
+    </motion.section>
   );
 }

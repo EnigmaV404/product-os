@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 
 import { ContactSection } from "@/components/ContactSection";
 import { Hero } from "@/components/Hero";
+import { BridgeSection } from "@/components/BridgeSection";
 import { HumanSection } from "@/components/HumanSection";
 import { Navigation } from "@/components/Navigation";
 import { architectureArtifacts } from "@/data/architectureArtifacts";
@@ -75,7 +76,7 @@ export default function Home() {
   return (
     <main>
       <Navigation />
-      <Hero data={profile} metrics={impactMetrics} />
+      <BridgeSection />
       <ProductBrain edges={brainEdges} nodes={brainNodes} />
       <ThinkingEngine data={decisionJournal} />
       <EvolutionJourney data={evolution} />
